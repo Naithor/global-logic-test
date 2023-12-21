@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class RegexValidation {
 
     public static boolean regexValidation(String value, String regexPattern) {
-        return Pattern.compile(regexPattern)
+        return !Pattern.compile(regexPattern)
                 .matcher(value)
                 .matches();
     }

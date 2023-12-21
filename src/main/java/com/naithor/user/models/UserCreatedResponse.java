@@ -1,5 +1,6 @@
 package com.naithor.user.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -10,14 +11,19 @@ import java.util.UUID;
 @Getter
 public class UserCreatedResponse {
 
+    @JsonProperty("id")
     private UUID id;
 
-    private LocalDate created;
+    @JsonProperty("created")
+    private LocalDate createdAt;
 
+    @JsonProperty("lastLogin")
     private LocalDate lastLogin;
 
-    private String token;
+    @JsonProperty("token")
+    private String jsonWebToken;
 
+    @JsonProperty("isActive")
     private boolean isActive;
 
 }

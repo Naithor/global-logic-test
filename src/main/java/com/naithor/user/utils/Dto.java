@@ -16,11 +16,13 @@ import java.util.stream.Collectors;
 @UtilityClass
 public class Dto {
 
-    public static UserEntity userResquestModelToUserEntity(UserRequest userRequest, List<PhoneEntity> phones) {
+    public static UserEntity userResquestModelToUserEntity(UserRequest userRequest,
+                                                           List<PhoneEntity> phones,
+                                                           String jsonWebToken) {
         return UserEntity.builder()
                 .id(UUID.randomUUID())
                 .createdAt(LocalDate.now())
-                .token("")
+                .jsonWebToken(jsonWebToken)
                 .isActive(true)
                 .name(userRequest.getName())
                 .email(userRequest.getEmail())
@@ -41,9 +43,9 @@ public class Dto {
     public static UserCreatedResponse userEntityToUserResponse(UserEntity userEntity) {
         return UserCreatedResponse.builder()
                 .id(userEntity.getId())
-                .created(userEntity.getCreatedAt())
+                .createdAt(userEntity.getCreatedAt())
                 .lastLogin(userEntity.getLastLogin())
-                .token("")
+                .jsonWebToken(userEntity.getJsonWebToken())
                 .isActive(userEntity.isActive())
                 .build();
     }
@@ -63,9 +65,9 @@ public class Dto {
 
         UserCreatedResponse userCreatedResponse = UserCreatedResponse.builder()
                 .id(userEntity.getId())
-                .created(userEntity.getCreatedAt())
-                .lastLogin(userEntity.getLastLogin())
-                .token(userEntity.getToken())
+                .createdAt(userEntity.getCreatedAt())
+                .lastLogin(LocalDate.now())
+                .jsonWebToken(userEntity.getJsonWebToken())
                 .isActive(userEntity.isActive())
                 .build();
 

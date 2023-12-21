@@ -8,6 +8,7 @@ import lombok.Getter;
 @Getter
 public class Phone {
 
+    @JsonProperty("number")
     private long number;
 
     @JsonProperty("citycode")

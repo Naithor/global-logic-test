@@ -28,8 +28,8 @@ public class UserEntity {
     @Column(name = "last_login")
     private LocalDate lastLogin;
 
-    @Column(name = "token")
-    private String token;
+    @Column(name = "jsonWebToken")
+    private String jsonWebToken;
 
     @Column(name = "is_active")
     private boolean isActive;
@@ -43,7 +43,8 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userEntity", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     private List<PhoneEntity> phones;
 
 }
