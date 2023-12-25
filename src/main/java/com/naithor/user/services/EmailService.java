@@ -12,9 +12,10 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-public class EmailService {
+public class
+EmailService {
 
-    private static final String REGEX_EMAIL_PATTERN = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+    public static final String REGEX_EMAIL_PATTERN = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
     public static final String ERROR_EMPTY_EMAIL = "Error: Email cannot be empty!";
     public static final String ERROR_INVALID_EMAIL = "Error: Email invalid!";
     public static final String ERROR_EXIST_USER = "Error: User already exist!";
@@ -33,19 +34,19 @@ public class EmailService {
         validateExistingEmail(email);
     }
 
-    private static void validateEmptyEmail(String email) {
+    protected void validateEmptyEmail(String email) {
         if (email.isBlank()) {
             throw new NoSuchElementException(ERROR_EMPTY_EMAIL);
         }
     }
 
-    private static void validateValidEmail(String email) {
+    protected void validateValidEmail(String email) {
         if (RegexValidation.regexValidation(email, REGEX_EMAIL_PATTERN)) {
             throw new IllegalArgumentException(ERROR_INVALID_EMAIL);
         }
     }
 
-    private void validateExistingEmail(String email) {
+    protected void validateExistingEmail(String email) {
         List<UserEntity> userEntityList = userRepository.findByEmail(email);
         if (!userEntityList.isEmpty()) {
             throw new DuplicateKeyException(ERROR_EXIST_USER);

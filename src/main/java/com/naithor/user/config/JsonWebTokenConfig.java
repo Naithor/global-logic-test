@@ -13,12 +13,12 @@ import java.util.Date;
 @Configuration
 public class JsonWebTokenConfig {
 
-    private static final String SECRET = "globallogic";
-    private static final String ISSUER = "globallogic";
+    protected static final String SECRET = "globallogic";
+    protected static final String ISSUER = "globallogic";
     private static final String SUBJECT = "globallogic details";
-    private static final long TOKEN_VALIDITY_IN_MILLIS = 500L;
-    public static final String ERROR_TOKEN_VERIFYING = "Error: token verifying: %s";
-    public static final String ERROR_TOKEN_DECODING = "Error: token decoding: %s";
+    private static final long TOKEN_VALIDITY_IN_MILLIS = 900000;
+    private static final String ERROR_TOKEN_VERIFYING = "Error: token verifying: %s";
+    private static final String ERROR_TOKEN_DECODING = "Error: token decoding: %s";
 
     private static Algorithm algorithm;
     private static JWTVerifier verifier;
@@ -40,7 +40,7 @@ public class JsonWebTokenConfig {
                 .sign(algorithm);
     }
 
-    private DecodedJWT verifyJWT(String jwtToken) {
+    protected DecodedJWT verifyJWT(String jwtToken) {
         try {
             return verifier.verify(jwtToken);
         } catch (JWTVerificationException e) {
@@ -48,7 +48,7 @@ public class JsonWebTokenConfig {
         }
     }
 
-    private DecodedJWT decodedJWT(String jwtToken) {
+    protected DecodedJWT decodedJWT(String jwtToken) {
         try {
             return JWT.decode(jwtToken);
         } catch (JWTDecodeException e) {
@@ -56,7 +56,7 @@ public class JsonWebTokenConfig {
         }
     }
 
-    private boolean isJWTExpired(DecodedJWT decodedJWT) {
+    protected boolean isJWTExpired(DecodedJWT decodedJWT) {
         return decodedJWT.getExpiresAt()
                 .before(new Date());
     }

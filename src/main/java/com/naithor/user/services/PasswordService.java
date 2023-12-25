@@ -19,13 +19,13 @@ public class PasswordService {
         validateValidPassword(password);
     }
 
-    private static void validateEmptyPassword(String password) {
+    protected void validateEmptyPassword(String password) {
         if (password.isBlank()) {
             throw new NoSuchElementException(ERROR_EMPTY_PASSWORD);
         }
     }
 
-    private static void validateValidPassword(String email) {
+    protected void validateValidPassword(String email) {
         if (RegexValidation.regexValidation(email, REGEX_PASSWORD_PATTERN)) {
             throw new IllegalArgumentException(ERROR_INVALID_PASSWORD);
         }

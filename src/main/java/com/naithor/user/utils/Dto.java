@@ -16,9 +16,9 @@ import java.util.stream.Collectors;
 @UtilityClass
 public class Dto {
 
-    public static UserEntity userResquestModelToUserEntity(UserRequest userRequest,
-                                                           List<PhoneEntity> phones,
-                                                           String jsonWebToken) {
+    public static UserEntity userRequestModelToUserEntity(UserRequest userRequest,
+                                                          List<PhoneEntity> phones,
+                                                          String jsonWebToken) {
         return UserEntity.builder()
                 .id(UUID.randomUUID())
                 .createdAt(LocalDate.now())

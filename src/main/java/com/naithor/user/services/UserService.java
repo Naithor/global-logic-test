@@ -19,6 +19,7 @@ import java.util.UUID;
 @Service
 public class UserService {
 
+    public static final String ERROR_USER_NOT_FOUND = "Error: User not found!";
     private UserRepository userRepository;
 
     private JsonWebTokenConfig jsonWebTokenConfig;
@@ -61,7 +62,7 @@ public class UserService {
         List<PhoneEntity> phoneEntities = phoneService.getPhoneEntities(userRequest);
         jsonWebTokenConfig.initialize();
         String jsonWebToken = jsonWebTokenConfig.createJWT();
-        UserEntity userEntity = Dto.userResquestModelToUserEntity(userRequest, phoneEntities, jsonWebToken);
+        UserEntity userEntity = Dto.userRequestModelToUserEntity(userRequest, phoneEntities, jsonWebToken);
         userRepository.save(userEntity);
 
         return Dto.userEntityToUserResponse(userEntity);
@@ -69,7 +70,7 @@ public class UserService {
 
     public UserContractResponse read(UUID uuid) throws NotFoundException {
         Optional<UserEntity> optionalUserEntity = userRepository.findById(uuid);
-        UserEntity userEntity = optionalUserEntity.orElseThrow(() -> new NotFoundException("Error: User not found!"));
+        UserEntity userEntity = optionalUserEntity.orElseThrow(() -> new NotFoundException(ERROR_USER_NOT_FOUND));
 
         return Dto.userEntityToUserContractResponse(userEntity);
     }
