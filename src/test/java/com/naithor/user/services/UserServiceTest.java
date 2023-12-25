@@ -150,7 +150,7 @@ class UserServiceTest {
     }
 
     @Test
-    void givenId_shouldThrowNotFoundException() throws NotFoundException {
+    void givenId_shouldThrowNotFoundException() {
         UUID id = UUID.randomUUID();
         when(userRepository.findById(any())).thenReturn(Optional.empty());
 
